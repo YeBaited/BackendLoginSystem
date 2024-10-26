@@ -1,20 +1,22 @@
-import { useEffect } from "react";
+function App() {  
 
-function App() {
-
-  useEffect(() => {
-
-    const response = fetch("php/test.php", {
-      method: "POST",
-      body: JSON.stringify({ username: "example" })
-
-    })
-      .then((response) => response.text())
-      .then((response) => console.log(response));
-
+  return (
+    <>
     
-    console.log(response);
-  }, []);
+      <div className="flex justify-center">
+        <form className="bg-red-200 p-5" action="php/test.php" method="POST">
+          <h1>Username:</h1>
+          <input className="bg-red-300" type="text" name="Username"/>
+          <h1>Password:</h1>
+          <input className="bg-red-300" type="text" name="Password"/>
+          <br />
+          <input type="submit" />
+
+        </form>
+      </div>
+    </>
+    
+  )
 
 
 }
