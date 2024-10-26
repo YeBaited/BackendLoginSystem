@@ -1,17 +1,15 @@
-
-
+import { useEffect } from "react";
 
 function App() {
-  fetch('./test.php')
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.log(error))
 
-  return (
-    <>
-      <h1 className='text-5xl'>This is login page btw</h1>
-    </>
-  )
+  useEffect(() => {
+    fetch("php/test.php")
+      .then((response) => response.text())
+      .then((response) => console.log(response));
+
+      console.log("reloaded!")
+  }, []);
+
 }
 
 export default App
