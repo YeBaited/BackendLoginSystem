@@ -1,24 +1,19 @@
 <?php
     header('Access-Control-Allow-Origin: *');
-    $entityBody = file_get_contents('php://input');
 
-    $Pass = null;
-    $User = null;
+    $entityBody = file_get_contents("php://input");
+    $Decoded = json_decode($entityBody, true);
 
+    $Username = $Decoded["Username"];
+    $Password = $Decoded["Password"];
 
-    if (isset($_POST["Username"])){
-        $User = $_POST["Username"];
+    $TestArray = array(
+        "isCorrect" => "Alright"
+    );
+
+    if ($Username == "admin" || $Password == "admin"){
+        echo json_encode($TestArray);
+    } else {
+        echo "No";
     }
-
-    if (isset($_POST["Password"])){
-        $Pass = $_POST["Password"];
-    }
-    
-
-    if ($Pass == "Correct"){
-        echo "Correct password!";
-    }else {
-        echo "Incorrect password!";
-    }
-    echo "\n  The password you just typed: {$Pass}";
 ?>
