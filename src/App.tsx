@@ -18,6 +18,9 @@ function App() {
     var xmlHttp = new XMLHttpRequest()
     xmlHttp.onreadystatechange = function(){
       console.log("State changed!")
+      if (!this.response){
+        return
+      }
       console.log(JSON.parse(this.response))
       //console.log(this.response)
       

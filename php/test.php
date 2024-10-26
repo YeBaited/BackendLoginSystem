@@ -14,6 +14,6 @@
     if ($Username == "admin" || $Password == "admin"){
         echo json_encode($TestArray);
     } else {
-        echo "No";
+        echo json_encode($TestArray);
     }
 ?>
