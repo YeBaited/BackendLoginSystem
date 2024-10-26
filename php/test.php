@@ -1,9 +1,24 @@
 <?php
-    header('Access-Control-Allow-Origin: http://localhost:5173/');
-    
-    $Pass = $_POST["Username"];
-    $User = $_POST["Password"];
+    header('Access-Control-Allow-Origin: *');
+    $entityBody = file_get_contents('php://input');
 
-    echo "Your Password is {$Pass}";
-    echo "Your Username is {$User}";
+    $Pass = null;
+    $User = null;
+
+
+    if (isset($_POST["Username"])){
+        $User = $_POST["Username"];
+    }
+
+    if (isset($_POST["Password"])){
+        $Pass = $_POST["Password"];
+    }
+    
+
+    if ($Pass == "Correct"){
+        echo "Correct password!";
+    }else {
+        echo "Incorrect password!";
+    }
+    echo "\n  The password you just typed: {$Pass}";
 ?>
