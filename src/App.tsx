@@ -1,34 +1,29 @@
-import {InputHTMLAttributes, useEffect, useState } from "react"
+
+function HandleLogin(e : React.FormEvent<HTMLFormElement>){
+  console.log("Handling login!")
+  e.preventDefault()
+  const Usr = document.querySelector("#Username") as HTMLInputElement
+  const Pas = document.querySelector("#Password") as HTMLInputElement
+
+  let Saved = {
+    "Username" : Usr.value, 
+    "Password" : Pas.value
+  }
+
+
+  var req = new XMLHttpRequest()
+
+  req.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 400) {
+      console.log(this.response)
+    }
+  }
+  req.open("POST", "http://localhost:82/php/test.php")
+  req.send(JSON.stringify(Saved))
+}
 
 function App() {  
   
-  function HandleLogin(e : React.FormEvent<HTMLFormElement>){
-    e.preventDefault()
-    const Usr = document.querySelector("#Username") as HTMLFormElement
-
-    if (!Usr){
-      return
-    }
-
-    let data = {
-      Username : "admin",
-      Password : "admin"
-    }
-
-    var xmlHttp = new XMLHttpRequest()
-    xmlHttp.onreadystatechange = function(){
-      console.log("State changed!")
-      if (!this.response){
-        return
-      }
-      console.log(JSON.parse(this.response))
-      //console.log(this.response)
-      
-    }
-    xmlHttp.open("POST", "http://localhost:81/php/test.php",)
-
-    xmlHttp.send(JSON.stringify(data))
-  }
 
   return (
     <>

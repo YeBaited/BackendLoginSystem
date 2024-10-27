@@ -1,19 +1,21 @@
 <?php
-    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Origin: http://localhost:5173');
 
     $entityBody = file_get_contents("php://input");
     $Decoded = json_decode($entityBody, true);
 
-    $Username = $Decoded["Username"];
-    $Password = $Decoded["Password"];
-
-    $TestArray = array(
-        "isCorrect" => "Alright"
+    $DataToReturn = array(
+        "AllowedAccess" => false,
     );
-
-    if ($Username == "admin" || $Password == "admin"){
-        echo json_encode($TestArray);
+    
+    if ($Decoded["Username"] === "admin" and $Decoded["Password"] === "admin"){
+        $DataToReturn["AllowedAccess"] = true;
     } else {
-        echo json_encode($TestArray);
-    }
+        $DataToReturn["AllowedAccess"] = false;
+    };
+
+
+    echo json_encode($DataToReturn)
+
+
 ?>
