@@ -2,9 +2,9 @@ import {InputHTMLAttributes, useEffect, useState } from "react"
 
 function App() {  
   
-  function HandleLogin(e : HTMLFormElement){
+  function HandleLogin(e : React.FormEvent<HTMLFormElement>){
     e.preventDefault()
-    const Usr = document.querySelector("#Username") as HTMLInputElement
+    const Usr = document.querySelector("#Username") as HTMLFormElement
 
     if (!Usr){
       return
@@ -32,12 +32,22 @@ function App() {
 
   return (
     <>
-      <h1>Login Form!</h1>
-      <form className="flex justify-center" onSubmit={e => HandleLogin(e)}>
-        <input type="text" className="bg-red-500" name="Username" id="Username"/>
-        <input type="text" className="bg-red-500" name="Password" id="Password"/>
-        <button className="bg-red-400">test</button>
-      </form>
+      <div className="flex justify-center">
+
+        <form className="flex justify-center bg-white flex-col w-11/12 sm:w-3/12 p-2 sm:p-5 border border-black mt-5" onSubmit={e => HandleLogin(e)}>
+          <h1 className="mb-3 text-black text-xl font-bold">Login</h1>
+          <h1 className="text-black font-semibold">Username</h1>
+          <input type="text" className="border border-black  mb-5" name="Username" id="Username"/>
+          <h1 className="text-black font-semibold">Password</h1>
+          <input type="text" className="border border-black mb-5" name="Password" id="Password"/>
+
+          <button className="border border-black w-4/6 m-auto">Login</button>
+          <button className="text-blue-900 font-semibold w-fit mt-2">Don't have an account?</button>
+
+        </form>
+
+
+      </div>
     
     </>
   )
