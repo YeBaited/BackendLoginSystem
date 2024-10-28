@@ -16,9 +16,10 @@ function HandleLogin(e : React.FormEvent<HTMLFormElement>){
   req.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 400) {
       console.log(this.response)
-    }
+    } 
+
   }
-  req.open("POST", "http://localhost:82/php/test.php")
+  req.open("POST", "http://localhost:82/php/Login.php")
   req.send(JSON.stringify(Saved))
 }
 
