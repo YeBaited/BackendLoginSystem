@@ -22,6 +22,8 @@ function HandleLogin(e : React.FormEvent<HTMLFormElement>){
   req.send(JSON.stringify(Saved))
 }
 
+import { NavLink } from "react-router-dom"
+
 function App() {  
   
 
@@ -37,7 +39,7 @@ function App() {
           <input type="text" className="border border-black mb-5" name="Password" id="Password"/>
 
           <button className="border border-black w-4/6 m-auto">Login</button>
-          <button className="text-blue-900 font-semibold w-fit mt-2">Don't have an account?</button>
+          <NavLink to="/Signup"><button className="text-blue-900 font-semibold w-fit mt-2">Don't have an account?</button></NavLink>
 
         </form>
 
