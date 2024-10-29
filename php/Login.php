@@ -18,7 +18,7 @@
         die();
     }
 
-    $Usr = $decodedBody["Username"];
+    $Usr = strtolower($decodedBody["Username"]);
     $pas = $decodedBody["Password"];
 
 
@@ -37,10 +37,8 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    echo ("Connection successfull!");
 
     $sql = "SELECT * FROM logindb.logincredentials WHERE username = '$Usr' AND password ='$pas'";
-
     
     $result = $conn->query($sql);
 
