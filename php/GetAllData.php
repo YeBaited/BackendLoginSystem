@@ -1,5 +1,5 @@
 <?php
-
+    header("Access-Control-Allow-Origin: http://localhost:5173");
     $db = "localhost";
     $username = "root";
     $password = "";
@@ -17,9 +17,8 @@
 
     $data = $req->fetch_all();
 
-    foreach ($data as $value){
-        echo json_encode($value) . "   \n"; 
-    };
+    
+    echo json_encode($data)
 
 
 ?>
