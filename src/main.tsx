@@ -1,8 +1,8 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import App from './App.tsx'
 import Signup from './Signup.tsx'
+import Home from './Home.tsx'
 
 import './Main.css'
 import { 
@@ -18,13 +18,13 @@ const router = createBrowserRouter(
     <Route>
       <Route index element={<App />}/>
       <Route path="Signup" element={<Signup />}/>
+      <Route path="Home" element={<Home />}/>
       <Route path="*" element={<App />}/>
     </Route>
   )
 )
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+  <RouterProvider router={router} />
+
 )
