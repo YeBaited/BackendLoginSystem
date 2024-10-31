@@ -1,25 +1,34 @@
-function cookData(data : []){
-    console.log(JSON.parse(data))
+import { useState } from "react"
 
-}
 
-function getData(){
-    var xhtml = new XMLHttpRequest()
-    xhtml.onreadystatechange = function(){
-        if (this.readyState == 4 || this.readyState == 400){
-            if (!this.response) return
-            cookData(this.response)
-        } 
-    }
-
-    xhtml.open("POST", "http://localhost:82/php/GetAllData.php")
-    xhtml.send()
-}
 
 function Home(){
-        getData()
+    const [CurrentData, SetData] = useState([])
+
+    function getData(){
+        console.log("running!")
+        var xhtml = new XMLHttpRequest()
+        xhtml.onreadystatechange = function(){
+            if (this.readyState == 4 || this.readyState == 400){
+                if (!this.response) return
+                SetData(JSON.parse(this.response))
+            } 
+        }
+        
+        xhtml.open("POST", "http://localhost:82/php/GetAllData.php")
+        xhtml.send()
+    
+    }
+
+    console.log(CurrentData)
+    
     return (
-        <h1>Test</h1>
+        <>
+            <div>
+                <button onClick={getData}>Refresh</button>
+                {CurrentData.map(d => <h1 key={d[0]}>{d[1]}</h1>)}
+            </div>
+        </>
     )
 }
 
