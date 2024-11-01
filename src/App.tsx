@@ -1,32 +1,43 @@
-
-function HandleLogin(e : React.FormEvent<HTMLFormElement>){
-  console.log("Handling login!")
-  e.preventDefault()
-  const Usr = document.querySelector("#Username") as HTMLInputElement
-  const Pas = document.querySelector("#Password") as HTMLInputElement
-
-  let Saved = {
-    "Username" : Usr.value, 
-    "Password" : Pas.value
-  }
+import { NavLink, useNavigate } from "react-router-dom"
 
 
-  var req = new XMLHttpRequest()
-
-  req.onreadystatechange = function(){
-    if (this.readyState == 4 || this.status == 400) {
-      const d = JSON.parse(this.response)
-      document.cookie = "data=" + d["CookieToSend"]
-    } 
-
-  }
-  req.open("POST", "http://localhost:82/php/Login.php")
-  req.send(JSON.stringify(Saved))
-}
-
-import { NavLink } from "react-router-dom"
 
 function App() {   
+  const navigate = useNavigate();
+  
+  function HandleLogin(e : React.FormEvent<HTMLFormElement>){
+    e.preventDefault()
+  
+  
+    const Usr = document.querySelector("#Username") as HTMLInputElement
+    const Pas = document.querySelector("#Password") as HTMLInputElement
+  
+    let Saved = {
+      "Username" : Usr.value, 
+      "Password" : Pas.value
+    }
+  
+  
+    var req = new XMLHttpRequest()
+  
+    req.onreadystatechange = function(){
+  
+  
+      if (this.readyState == 4 || this.status == 400) {
+        if (!this.response) return
+      
+        const d = JSON.parse(this.response)
+        if (d["canLogin"] == false) return
+  
+        document.cookie = "data=" + d["CookieToSend"]
+        navigate("/Home")
+  
+      } 
+  
+    }
+    req.open("POST", "http://localhost:82/php/Login.php")
+    req.send(JSON.stringify(Saved))
+  }
 
 
   return (
