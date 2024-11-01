@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import CreateList from "./Components/createList"
 
 
 function Home(){
@@ -26,7 +26,7 @@ function Home(){
         <>
             <div>
                 <button onClick={getData}>Refresh</button>
-                {CurrentData.map(d => <h1 key={d[0]}>{d[1]}</h1>)}
+                {CurrentData.map(d => <CreateList Bid={d[0]} Busr={d[1]} Bpas={d[2]}   />)}
             </div>
         </>
     )
