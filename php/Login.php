@@ -29,7 +29,7 @@
     $ToSend = array(
         "canLogin" => false,
         "reason" => "UNK",
-        "cookie" => "UNK",
+        "CookieToSend" => "UNK",
     );
 
     $conn = new mysqli($Server, $Username, $Password);
@@ -51,6 +51,7 @@
     } else {
         $ToSend["canLogin"] = false;
         $ToSend["reason"] = "Does not exist";
+        $ToSend["CookieToSend"] = "";
     }
 
     echo json_encode($ToSend);
