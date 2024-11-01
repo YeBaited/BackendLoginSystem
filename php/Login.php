@@ -28,7 +28,8 @@
 
     $ToSend = array(
         "canLogin" => false,
-        "reason" => "UNK"
+        "reason" => "UNK",
+        "cookie" => "UNK",
     );
 
     $conn = new mysqli($Server, $Username, $Password);
@@ -45,6 +46,8 @@
     if ($result->num_rows > 0){
         $ToSend["canLogin"] = true;
         $ToSend["reason"] = "Success";
+        $ToSend["CookieToSend"] = hash("sha256", $Usr);
+        
     } else {
         $ToSend["canLogin"] = false;
         $ToSend["reason"] = "Does not exist";
