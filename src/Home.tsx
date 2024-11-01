@@ -1,10 +1,7 @@
 import { useState } from "react"
 import CreateList from "./Components/CreateList"
-import { useNavigate } from "react-router-dom"
-
 
 function Home(){
-    const nv = useNavigate()
     const [CurrentData, SetData] = useState([])
 
     function getData(){
