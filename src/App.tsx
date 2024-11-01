@@ -14,8 +14,9 @@ function HandleLogin(e : React.FormEvent<HTMLFormElement>){
   var req = new XMLHttpRequest()
 
   req.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 400) {
-      console.log(this.response)
+    if (this.readyState == 4 || this.status == 400) {
+      const d = JSON.parse(this.response)
+      document.cookie = "data=" + d["CookieToSend"]
     } 
 
   }
