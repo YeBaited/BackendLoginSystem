@@ -46,7 +46,7 @@ function Signup(){
 
           <button className="border border-black w-4/6 m-auto">Sign Up</button>
 
-          <NavLink to="/Home"><button className="text-blue-900 font-semibold w-fit mt-2">Already got an account?</button></NavLink>
+          <NavLink to="/"><button className="text-blue-900 font-semibold w-fit mt-2">Already got an account?</button></NavLink>
 
         </form>
 
