@@ -23,7 +23,13 @@ function createAccount(e : FormEvent<HTMLFormElement>){
 
   req.onreadystatechange = function(){
     if (this.readyState == 4 || this.readyState == 400){
-      console.log("Received the data!")
+      console.log("Received the data for signup!")
+      if (!this.response) return
+      const decode = JSON.parse(this.response)
+
+      if (!decode["Reason"]) return 
+      alert(decode["Reason"])
+
     }
   }
 
