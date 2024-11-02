@@ -27,8 +27,9 @@ function App() {
         if (!this.response) return
       
         const d = JSON.parse(this.response)
-        if (d["canLogin"] == false) return
-  
+        alert(d["reason"])
+        if (!d["canLogin"]) return
+        
         document.cookie = "data=" + d["CookieToSend"]
         navigate("/Home")
   
