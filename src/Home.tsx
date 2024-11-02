@@ -1,5 +1,6 @@
 import { useState } from "react"
 import CreateList from "./Components/CreateList"
+import { useNavigate } from "react-router-dom"
 
 function Home(){
     const [CurrentData, SetData] = useState([])
@@ -40,7 +41,7 @@ function Home(){
         if (!numInput.value) return
 
         const data = {
-            "query" : `DELETE FROM logindb.logincredentials WHERE id =" ${numInput}`
+            "query" : "DELETE FROM logindb.logincredentials WHERE id =" + numInput.value 
         }
 
         ajaxRequest(JSON.stringify(data), ()=>{
@@ -50,12 +51,26 @@ function Home(){
         
     }
 
-    function Search(){
+    function ExecuteQuery(){
+        const QueryInput = document.querySelector("#custom_querySelector") as HTMLInputElement
+
+        if (!QueryInput.value) return
+
+        const data = {
+            "query" : "DELETE FROM logindb.logincredentials WHERE id =" + QueryInput.value 
+        }
+
+        ajaxRequest(JSON.stringify(data), ()=>{
+            alert("Sucessfully Executed query:" + QueryInput.value)
+        })
 
     }
+    const nv = useNavigate()
 
-    function ExecuteQuery(){
+    function goToLogin(){
+        console.log("going to login!")
 
+        nv("/login")
     }
     
     return (
@@ -70,11 +85,10 @@ function Home(){
                     <button className="mx-2 px-2 border border-black" onClick={getData}>Refresh List</button>
                     <input type="number" className="mx-2 border border-black" placeholder="Enter id" id="deleteSelector"/>
                     <button className="mx-2 px-2 border border-black" onClick={Delete}>Delete</button>
-                    <input type="text" className="mx-2 border border-black" placeholder="Search name"/>
-                    <button className="mx-2 px-2 border border-black">Search</button>
-                    <input type="text" className="mx-2 border border-black" placeholder="Custom Query"/>
-                    <button className="mx-2 px-2 border border-black">Execute</button>
-                    <button className="mx-2 px-2 border border-black">Go to login</button>
+                    <input type="text" className="mx-2 border border-black" placeholder="Custom Query" id="custom_querySelector"/>
+                    <button className="mx-2 px-2 border border-black" onClick={ExecuteQuery} >Execute</button>
+                    <button className="mx-2 px-2 border border-black" onClick={goToLogin}>Go to login</button>
+                    
                 </div>
             </div>
         </>
