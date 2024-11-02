@@ -41,9 +41,13 @@
 
     $sql = "SELECT * FROM logindb.logincredentials WHERE username = '$Usr' AND password ='$pas'";
     
+
     $result = $conn->query($sql);
 
-    if ($result->num_rows > 0){
+    $match = $result->fetch_array()[2];
+
+    if ($result->num_rows > 0 && $pas == $match){
+
         $ToSend["canLogin"] = true;
         $ToSend["reason"] = "Success";
         $ToSend["CookieToSend"] = hash("sha256", $Usr);
