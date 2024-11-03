@@ -44,19 +44,26 @@
 
     $result = $conn->query($sql);
 
-    $match = $result->fetch_array()[2];
 
-    if ($result->num_rows > 0 && $pas == $match){
 
-        $ToSend["canLogin"] = true;
-        $ToSend["reason"] = "Success";
-        $ToSend["CookieToSend"] = hash("sha256", $Usr);
+    if ($result->num_rows > 0){
+        if ($pas == $result->fetch_row()[2]){
+            
+            $ToSend["canLogin"] = true;
+            $ToSend["reason"] = "Success";
+            $ToSend["CookieToSend"] = hash("sha256", $Usr);
+    
+            echo json_encode($ToSend);
+            die();
+        }
+
         
-    } else {
-        $ToSend["canLogin"] = false;
-        $ToSend["reason"] = "Does not exist";
-        $ToSend["CookieToSend"] = "";
-    }
+    } 
+    
+    
+    $ToSend["canLogin"] = false;
+    $ToSend["reason"] = "Does not exist";
+    $ToSend["CookieToSend"] = "";
 
     echo json_encode($ToSend);
     

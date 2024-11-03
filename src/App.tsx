@@ -27,6 +27,7 @@ function App() {
         if (!this.response) return
       
         const d = JSON.parse(this.response)
+      
         alert(d["reason"])
         if (!d["canLogin"]) return
         
